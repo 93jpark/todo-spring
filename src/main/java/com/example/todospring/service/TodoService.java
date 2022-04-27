@@ -63,9 +63,13 @@ public class TodoService {
         // 유효성 검증
         validate(entity);
 
-        // 해당 entity를 통해 삭제
-        repository.delete(entity);
-
+        try {
+            // 해당 entity를 통해 삭제
+            repository.delete(entity);
+        } catch(Exception e) {
+            log.error("error deleting entity", entity.getId(), e);
+            throw new RuntimeException("error deleting entity" + entity.getId());
+        }
         return repository.findAll();
     }
 
