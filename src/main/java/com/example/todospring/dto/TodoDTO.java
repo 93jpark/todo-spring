@@ -2,9 +2,11 @@ package com.example.todospring.dto;
 
 import com.example.todospring.model.TodoEntity;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Data

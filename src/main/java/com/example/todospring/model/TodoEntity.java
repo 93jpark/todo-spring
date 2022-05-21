@@ -20,7 +20,7 @@ public class TodoEntity {
     @GenericGenerator(name="system-uuid", strategy="uuid")
     //@Column(name="id")
     private String id; // object id
-    //@Column(name = "user_id")
+    //@Column(name = "userId")
     private String userId;
     //@Column(name = "title")
     private String title; // todo title
