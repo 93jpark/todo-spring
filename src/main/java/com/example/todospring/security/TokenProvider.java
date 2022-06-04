@@ -45,7 +45,6 @@ public class TokenProvider {
         // SECRET_KEY를 이용해 서명한 부분
         Nn4d1MOVLZg79sfFACTIpCPKqWmpZMZQsbNrXdJJNWkRv50_17bPLQPwhMobT4vBOG6Q3JYjhDrKF1BSaUxZ0g
             */
-        System.out.println("USER ID IS "+userEntity.getId()+"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
         return Jwts.builder()
                 // header에 들어갈 내용 및 서명을 하기 위한 SECRET_KEY
                 .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
