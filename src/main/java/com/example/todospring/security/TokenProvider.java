@@ -4,18 +4,25 @@ import com.example.todospring.model.UserEntity;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+//import io.jsonwebtoken.io.Decoders;
+//import io.jsonwebtoken.security.Keys;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.crypto.SecretKey;
+import java.security.Key;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class TokenProvider {
 
     private static final String SECRET_KEY = "NMA8JPctFuna59f5";
+    //private static final SecretKey key = Key.hmacShaKeyFor(Decoders.BASE64.decode(SECRET_KEY));
 
     public String create(UserEntity userEntity) {
         // 기한은 토큰 생성일로부터 1일로 설정
@@ -38,10 +45,10 @@ public class TokenProvider {
         // SECRET_KEY를 이용해 서명한 부분
         Nn4d1MOVLZg79sfFACTIpCPKqWmpZMZQsbNrXdJJNWkRv50_17bPLQPwhMobT4vBOG6Q3JYjhDrKF1BSaUxZ0g
             */
-
+        System.out.println("USER ID IS "+userEntity.getId()+"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
         return Jwts.builder()
                 // header에 들어갈 내용 및 서명을 하기 위한 SECRET_KEY
-                .signWith(SignatureAlgorithm.ES512, SECRET_KEY)
+                .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
                 //payload에 들어갈 내용
                 .setSubject(userEntity.getId()) // sub
                 .setIssuer("demo app") // iss
@@ -59,6 +66,7 @@ public class TokenProvider {
                 .setSigningKey(SECRET_KEY)
                 .parseClaimsJws(token)
                 .getBody();
+
         return claims.getSubject(); // subject는 우리가 원하는 사용자의 아이디를 뜻한다.
     }
 }
