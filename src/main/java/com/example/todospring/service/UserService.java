@@ -5,6 +5,7 @@ import com.example.todospring.model.UserEntity;
 import com.example.todospring.persistance.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -30,7 +31,13 @@ public class UserService {
 
     }
 
-    public UserEntity getByCredentials(final String email, final String password) {
-        return userRepository.findByEmailAndPassword(email, password);
+    public UserEntity getByCredentials(final String email, final String password, final PasswordEncoder encoder) {
+        final UserEntity originalUser = userRepository.findByEmail(email);
+
+        // matches 메소드를 이용해서 패스워드가 같은지 확인
+        if(originalUser != null && encoder.matches(password, originalUser.getPassword())) {
+            return originalUser;
+        }
+        return null;
     }
 }
