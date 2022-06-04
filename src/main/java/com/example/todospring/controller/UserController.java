@@ -3,6 +3,7 @@ package com.example.todospring.controller;
 import com.example.todospring.dto.ResponseDTO;
 import com.example.todospring.dto.UserDTO;
 import com.example.todospring.model.UserEntity;
+import com.example.todospring.security.TokenProvider;
 import com.example.todospring.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private TokenProvider tokenProvider;
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@RequestBody UserDTO userDTO) {
@@ -52,9 +56,11 @@ public class UserController {
         UserEntity user = userService.getByCredentials(userDTO.getEmail(), userDTO.getPassword());
 
         if(user!= null) {
+            final String token = tokenProvider.create(user);
             final UserDTO responseUserDTO = UserDTO.builder()
                     .email(user.getUsername())
                     .id(user.getId())
+                    .token(token)
                     .build();
             return ResponseEntity.ok().body(responseUserDTO);
         } else {
