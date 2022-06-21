@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@CrossOrigin(origins="http://localhost:3000", maxAge=3600)
+@CrossOrigin(origins= {"http://localhost:3000", "http://ec2-15-164-50-0.ap-northeast-2.compute.amazonaws.com"}, maxAge=3600)
 @RestController
 @RequestMapping("todo")
 public class TodoController {

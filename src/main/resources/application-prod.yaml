@@ -1,13 +1,14 @@
 server:
   port : 5000
 spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://database-1.crhrin8dmx5c.ap-northeast-2.rds.amazonaws.com:3306/todo
+    username: root
+    password: Wns1125218!
   jpa:
     database: MYSQL
     show-sql: true
     database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
-      ddl-auto: update
-    datasource:
-      url: jdbc:mysql://database-1.crhrin8dmx5c.ap-northeast-2.rds.amazonaws.com:3306/database-1
-      username: root
-      password: Wns1125218!
+      ddl-auto: create

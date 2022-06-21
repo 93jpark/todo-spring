@@ -13,7 +13,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
-@CrossOrigin(origins="http://localhost:3000", maxAge=3600)
+//@CrossOrigin(origins="http://localhost:3000", maxAge=3600)
+@CrossOrigin(origins= {"http://localhost:3000", "http://ec2-15-164-50-0.ap-northeast-2.compute.amazonaws.com"}, maxAge=3600)
 @RestController
 @RequestMapping("/auth")
 public class UserController {

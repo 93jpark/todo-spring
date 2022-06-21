@@ -39,6 +39,8 @@ dependencies {
     //compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
     implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
     runtimeOnly 'mysql:mysql-connector-java'
+    // https://mvnrepository.com/artifact/org.springframework/spring-jdbc
+    implementation 'org.springframework:spring-jdbc:3.2.3.RELEASE'
 }
 
 tasks.named('test') {
